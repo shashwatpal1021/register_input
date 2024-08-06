@@ -3,21 +3,22 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
-	const [pairs, setPairs] = useState([{ name: '', value: '' }]);
+	const [pairs, setPairs] = useState([{ id: "", name: '', value: '' }]);
 	const [statusMessage, setStatusMessage] = useState('');
 
 	const handleInputChange = (index, event) => {
 		const values = [...pairs];
+		values[index].id = "";
 		values[index][event.target.name] = event.target.value;
 		setPairs(values);
 	};
 
 	const handleAddPair = () => {
-		setPairs([...pairs, { name: '', value: '' }]);
+		setPairs([...pairs, { id: "", name: '', value: '' }]);
 	};
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
+		e.preventDefault(); // Prevent the default form submission behavior
 		try {
 			const response = await axios.post(
 				'http://localhost:3000/api/pairs',
