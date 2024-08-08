@@ -58,6 +58,21 @@ const ViewPage = () => {
 		}
 	};
 
+	const handleDelete = async (id) => {
+		try {
+			console.log("fronre", id)
+			const response = await axios.delete(
+				`http://localhost:3000/api/pairs/${id}`,
+			);
+			console.log("wnewkebwn", response.data)
+			setPairs(response.data);
+			setEdit(false);
+			// console.log('Updated pair:', response.data);
+		} catch (error) {
+			console.error('Error updating pair:', error);
+		}
+		setEdit(false);
+	};
 
 
 	return (
@@ -96,6 +111,12 @@ const ViewPage = () => {
 										className="bg-green-600 text-white p-3 rounded-lg"
 									>
 										Edit
+									</button>
+									<button
+										onClick={() => handleDelete(pairs[0].id)}
+										className="bg-red-600 text-white p-3 rounded-lg"
+									>{}
+										Delete
 									</button>
 
 								</div>

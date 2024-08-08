@@ -70,6 +70,14 @@ app.put('/api/pairs/:id', (req, res) => {
 	res.status(200).json(updatedPairs);
 });
 
+app.delete('/api/pairs/:id', (req, res) => {
+	const { id } = req.params;
+	const existingPairs = readData();
+	const updatedPairs = existingPairs.filter((x) => x.id !== id)
+	writeData(updatedPairs); // Writing the updated data to the file
+	res.status(200).json(updatedPairs);
+});
+
 
 app.listen(port, () => { // Starting the server and listening on the specified port
 	console.log(`Server running at http://localhost:${port}`); // Logging the server URL
